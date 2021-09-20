@@ -1,6 +1,6 @@
-import draft
+from draft import Draft
 
 def main():
-    x = draft.Draft()
+    x = Draft(10)
 
 main()
