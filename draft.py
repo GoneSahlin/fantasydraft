@@ -1,16 +1,14 @@
+import pandas as pd
+
 class Draft:
     # constructor
     def __init__(self):
-        print("init")
-        self.y = "init ran"
+        self.read_players("espn_fantasy_projections.txt")
 
     # read in the player data from csv
     def read_players(self, filename):
-        pass
-
-    # sorts the players into positions
-    def sort_players(self):
-        pass
+        self.players_df = pd.read_csv(filename)
+        self.players_df["Picked"] = False
 
     # calculates draft order based on number of teams with a snake draft
     def calculate_draft_order(self):
@@ -18,7 +16,8 @@ class Draft:
 
     # initializes the teams
     def create_teams():
-        pass
+        num_teams = input("Number of teams: ")
+        
 
     # starts the draft
     def start(self):
@@ -42,4 +41,8 @@ class Draft:
 
     # gets the players with position pos
     def get_players(self, pos):
+        pass
+
+    # drafts a player
+    def draft_player(self, player_name, team):
         pass
