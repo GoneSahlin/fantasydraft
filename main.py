@@ -1,6 +1,14 @@
+"""
+Creates a fantasy football draft simulation
+"""
+
 from draft import Draft
 
 def main():
-    x = Draft(10)
+    """
+    main
+    :return: none
+    """
+    Draft(10)
 
 main()

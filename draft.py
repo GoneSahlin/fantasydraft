@@ -1,53 +1,77 @@
-from team import Team
+"""
+A fantasy football draft
+
+Author: Zach Sahlin
+"""
+
 import pandas as pd
+from team import Team
+
 
 class Draft:
-    # constructor
+    """A fantasy football draft"""
+
     def __init__(self, num_teams):
+        """
+        Constructor
+
+        :param num_teams: number of teams in the league
+        """
         self.read_players("espn_fantasy_projections.txt")
         self.create_teams(num_teams)
         self.calculate_draft_order(num_teams)
 
-    # read in the player data from csv
     def read_players(self, filename):
+        """Reads in the player data from a csv file
+        :param filename: name of the file with the player data
+        """
         self.players_df = pd.read_csv(filename)
         self.players_df["Picked"] = False
 
-    # calculates draft order based on number of teams with a snake draft
     def calculate_draft_order(self, num_teams):
+        """Calculates the draft order based on the number of teams using a snake draft
+        :param num_teams: number of teams in the league
+        """
         pass
 
-    # initializes the teams
     def create_teams(self, num_teams):
+        """Creates the teams in the draft
+        :param num_teams: number of teams in the league
+        """
         # num_teams = int(input("Number of teams: "))
         self.teams = []
-        for i in range(num_teams):
+        for _ in range(num_teams):
             self.teams.append(Team())
 
-    # starts the draft
     def start(self):
+        """Starts the draft"""
         pass
 
-    # takes the next turn of the draft
     def next_turn(self):
+        """Takes the next turn in the draft"""
         pass
 
-    # gets the next teams turn
     def get_next_team(self):
+        """Gets the team with the next pick"""
         pass
 
-    # ends the draft and projects rankings
     def end(self):
+        """Ends the draft and projects rankings"""
         pass
 
-    # gets the player list
     def get_players(self):
+        """Gets the player list"""
         pass
 
-    # gets the players with position pos
     def get_players(self, pos):
+        """Gets the players with position
+        :param pos: the position of the players to get
+        """
         pass
 
-    # drafts a player
     def draft_player(self, player_name, team):
+        """Drafts a player to a team
+        :param player_name: the name of the player to be drafted
+        :param team: the team the player will be drafted to
+        """
         pass
