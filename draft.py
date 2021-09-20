@@ -1,4 +1,4 @@
-"""
+"""draft
 A fantasy football draft
 
 Author: Zach Sahlin
@@ -17,12 +17,13 @@ class Draft:
 
         :param num_teams: number of teams in the league
         """
-        self.read_players("espn_fantasy_projections.txt")
+        self.read_players("C:/Users/zach/Programming/fantasydraft/fantasydraft/espn_fantasy_projections.txt")
         self.create_teams(num_teams)
         self.calculate_draft_order(num_teams)
 
     def read_players(self, filename):
         """Reads in the player data from a csv file
+
         :param filename: name of the file with the player data
         """
         self.players_df = pd.read_csv(filename)
