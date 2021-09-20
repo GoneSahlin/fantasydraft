@@ -13,7 +13,14 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-
+os.chdir('..')
+print(os.getcwd())
+# os.chdir('..')
+# print(os.getcwd())
+# print(sys.path)
+# # sys.path.insert(0, os.path.abspath('../..'))
+# directory_path = os.path.dirname(os.path.abspath(__file__))
+# new_path = os.path.join(directory_path, "espn_fantasy_projections.txt")
 
 # -- Project information -----------------------------------------------------
 

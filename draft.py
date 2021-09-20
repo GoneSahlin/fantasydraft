@@ -5,6 +5,8 @@ Author: Zach Sahlin
 """
 
 import pandas as pd
+import sys
+import os
 from team import Team
 
 
@@ -17,7 +19,8 @@ class Draft:
 
         :param num_teams: number of teams in the league
         """
-        self.read_players("C:/Users/zach/Programming/fantasydraft/fantasydraft/espn_fantasy_projections.txt")
+        # self.read_players("C:/Users/zach/Programming/fantasydraft/fantasydraft/espn_fantasy_projections.txt")
+        self.read_players("espn_fantasy_projections.txt")
         self.create_teams(num_teams)
         self.calculate_draft_order(num_teams)
 
@@ -26,7 +29,8 @@ class Draft:
 
         :param filename: name of the file with the player data
         """
-        self.players_df = pd.read_csv(filename)
+        this_directory = os.path.dirname(__file__)
+        self.players_df = pd.read_csv(os.path.join(this_directory, filename))
         self.players_df["Picked"] = False
 
     def calculate_draft_order(self, num_teams):
@@ -43,6 +47,7 @@ class Draft:
         self.teams = []
         for _ in range(num_teams):
             self.teams.append(Team())
+        print(self.teams)
 
     def start(self):
         """Starts the draft"""
