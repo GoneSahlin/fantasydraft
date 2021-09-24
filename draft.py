@@ -20,18 +20,29 @@ class Draft:
         """
 
         # declare vars
-        self.players_df = pd.DataFrame()
+        self.player_df = pd.DataFrame()
         self.num_teams = num_teams
         self.teams = []
+        self.next_team = 0
+        self.direction = 0  # which way the picks are moving in the snake draft
+        self.round = 0
+
+    def start(self):
+        """Starts the draft"""
+
+        self.read_players("espn_fantasy_projections.txt")
+        self.create_teams(self.num_teams)
+        self.calculate_draft_order(self.num_teams)
 
     def read_players(self, filename):
         """Reads in the player data from a csv file
 
         :param filename: name of the file with the player data
         """
+
         this_directory = os.path.dirname(__file__)
-        self.players_df = pd.read_csv(os.path.join(this_directory, filename))
-        self.players_df["Picked"] = False
+        self.player_df = pd.read_csv(os.path.join(this_directory, filename))
+        self.player_df["Picked"] = False
 
     def calculate_draft_order(self, num_teams):
         """Calculates the draft order based on the number of teams using a snake draft
@@ -51,15 +62,6 @@ class Draft:
             self.teams.append(Team())
         print(self.teams)
 
-    def start(self):
-        """Starts the draft"""
-
-        self.read_players("espn_fantasy_projections.txt")
-        self.create_teams(self.num_teams)
-        self.calculate_draft_order(self.num_teams)
-
-        pass
-
     def next_turn(self, team):
         """Takes the next turn in the draft"""
         pass
@@ -75,21 +77,20 @@ class Draft:
     def get_players(self):
         """Gets the player list
 
-        :returns players_df: DataFrame of all the players"""
+        :returns player_df: DataFrame of all the players"""
 
-        return self.players_df
+        return self.player_df
 
     def get_players(self, pos):
         """Gets the players with position
 
         :param pos: the position of the players to get {'RB', 'WR', 'QB', 'TE', 'K', 'ST'}
-        :returns players_pos_df: DataFrame for all the players with position pos
+        :returns player_pos_df: DataFrame for all the players with position pos
         """
 
-        players_pos_df = self.players_df.groupby('Position').get_group(pos)
+        player_pos_df = self.player_df.groupby('Position').get_group(pos)
 
-        return players_pos_df
-
+        return player_pos_df
 
     def draft_player(self, player_name, team):
         """Drafts a player to a team
