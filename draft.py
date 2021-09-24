@@ -5,7 +5,6 @@ Author: Zach Sahlin
 """
 
 import pandas as pd
-import sys
 import os
 from team import Team
 
@@ -35,12 +34,14 @@ class Draft:
 
     def calculate_draft_order(self, num_teams):
         """Calculates the draft order based on the number of teams using a snake draft
+
         :param num_teams: number of teams in the league
         """
         pass
 
     def create_teams(self, num_teams):
         """Creates the teams in the draft
+
         :param num_teams: number of teams in the league
         """
         # num_teams = int(input("Number of teams: "))
@@ -71,12 +72,14 @@ class Draft:
 
     def get_players(self, pos):
         """Gets the players with position
+
         :param pos: the position of the players to get
         """
         pass
 
     def draft_player(self, player_name, team):
         """Drafts a player to a team
+
         :param player_name: the name of the player to be drafted
         :param team: the team the player will be drafted to
         """

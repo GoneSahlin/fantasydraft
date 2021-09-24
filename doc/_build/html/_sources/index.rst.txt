@@ -9,12 +9,17 @@ Welcome to Fantasy Draft's documentation!
 .. automodule:: main
    :members:
 
-.. automodule:: draft
+|
+
+.. autoclass:: Draft
    :members:
 
-.. automodule:: team
+|
+
+.. autoclass:: Team
    :members:
 
+|
 
 .. toctree::
    :maxdepth: 2

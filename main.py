@@ -5,6 +5,7 @@ Author: Zach Sahlin
 """
 
 from draft import Draft
+from team import Team
 
 def main():
     """
