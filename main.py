@@ -7,12 +7,15 @@ Author: Zach Sahlin
 from draft import Draft
 from team import Team
 
+
 def main():
     """
     main
 
     :return: none
     """
-    Draft(10)
+    draft = Draft(10)
+    draft.start()
+
 
 main()

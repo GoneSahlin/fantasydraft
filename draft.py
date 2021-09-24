@@ -18,10 +18,11 @@ class Draft:
 
         :param num_teams: number of teams in the league
         """
-        # self.read_players("C:/Users/zach/Programming/fantasydraft/fantasydraft/espn_fantasy_projections.txt")
-        self.read_players("espn_fantasy_projections.txt")
-        self.create_teams(num_teams)
-        self.calculate_draft_order(num_teams)
+
+        # declare vars
+        self.players_df = pd.DataFrame()
+        self.num_teams = num_teams
+        self.teams = []
 
     def read_players(self, filename):
         """Reads in the player data from a csv file
@@ -52,9 +53,14 @@ class Draft:
 
     def start(self):
         """Starts the draft"""
+
+        self.read_players("espn_fantasy_projections.txt")
+        self.create_teams(self.num_teams)
+        self.calculate_draft_order(self.num_teams)
+
         pass
 
-    def next_turn(self):
+    def next_turn(self, team):
         """Takes the next turn in the draft"""
         pass
 
@@ -67,15 +73,23 @@ class Draft:
         pass
 
     def get_players(self):
-        """Gets the player list"""
-        pass
+        """Gets the player list
+
+        :returns players_df: DataFrame of all the players"""
+
+        return self.players_df
 
     def get_players(self, pos):
         """Gets the players with position
 
-        :param pos: the position of the players to get
+        :param pos: the position of the players to get {'RB', 'WR', 'QB', 'TE', 'K', 'ST'}
+        :returns players_pos_df: DataFrame for all the players with position pos
         """
-        pass
+
+        players_pos_df = self.players_df.groupby('Position').get_group(pos)
+
+        return players_pos_df
+
 
     def draft_player(self, player_name, team):
         """Drafts a player to a team
