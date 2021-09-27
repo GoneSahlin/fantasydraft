@@ -30,7 +30,7 @@ class Draft:
     def start(self):
         """Starts the draft"""
 
-        self.read_players("espn_fantasy_projections.txt")
+        self.read_players('espn_fantasy_projections.csv')
         self.create_teams(self.num_teams)
         self.calculate_draft_order(self.num_teams)
 
@@ -41,7 +41,7 @@ class Draft:
         """
 
         this_directory = os.path.dirname(__file__)
-        self.player_df = pd.read_csv(os.path.join(this_directory, filename))
+        self.player_df = pd.read_csv(os.path.join(this_directory, filename), index_col="RANK")
         self.player_df["Picked"] = False
 
     def calculate_draft_order(self, num_teams):
@@ -56,7 +56,7 @@ class Draft:
 
         :param num_teams: number of teams in the league
         """
-        # num_teams = int(input("Number of teams: "))
+
         self.teams = []
         for _ in range(num_teams):
             self.teams.append(Team())
@@ -92,10 +92,13 @@ class Draft:
 
         return player_pos_df
 
-    def draft_player(self, player_name, team):
+    def draft_player(self, player_rank, team):
         """Drafts a player to a team
 
-        :param player_name: the name of the player to be drafted
+        :param player_rank: the rank of the player to be drafted
         :param team: the team the player will be drafted to
         """
-        pass
+
+        self.teams[team].add_player()
+
+        self.player_df.at[player_rank, 'Picked'] = True
