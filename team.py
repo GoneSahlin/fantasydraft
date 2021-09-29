@@ -17,21 +17,23 @@ class Team:
         self.my_players = []
         self.empty_positions = pos_list
 
-    def add_player(self):
-        """Adds a player to the team
+    def add_player(self, player_rank):
+        """adds a player to the team
 
-        :return:
+        :param player_rank: the rank of the player to add
         """
 
-        pass
+        self.my_players.append(player_rank)
+        player_pos = self.draft.get_player_df().loc[player_rank]['Position']
+        self.empty_positions.remove(player_pos)
 
-    def get_unfilled_positions(self):
+    def get_empty_positions(self):
         """Gets the positions that haven't been filled yet
 
-        :returns unfilled_positions: the positions on the team that are empty
+        :returns empty_positions: the positions on the team that are empty
         """
 
-        pass
+        return self.empty_positions
 
     def make_selection(self):
         """Makes the next pick

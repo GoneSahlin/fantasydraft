@@ -64,7 +64,7 @@ class Draft:
 
         self.teams = []
         for _ in range(num_teams):
-            self.teams.append(Team(self))
+            self.teams.append(Team(self, self.pos_list))
         print(self.teams)
 
     def next_turn(self, team):
@@ -104,6 +104,14 @@ class Draft:
         :param team: the team the player will be drafted to
         """
 
-        self.teams[team].add_player()
+        self.teams[team].add_player(1)
 
         self.player_df.at[player_rank, 'Picked'] = True
+
+    def get_player_df(self):
+        """Returns the player_df
+
+        :return player_df: the DataFrame of players
+        """
+
+        return self.player_df
