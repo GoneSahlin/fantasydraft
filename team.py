@@ -25,7 +25,8 @@ class Team:
 
         self.my_players.append(player_rank)
         player_pos = self.draft.get_player_df().loc[player_rank]['Position']
-        self.empty_positions.remove(player_pos)
+        if player_pos in self.empty_positions:
+            self.empty_positions.remove(player_pos)
 
     def get_empty_positions(self):
         """Gets the positions that haven't been filled yet
