@@ -79,23 +79,15 @@ class Draft:
         """Ends the draft and projects rankings"""
         pass
 
-    def get_players(self):
+    def get_players(self, pos=None):
         """Gets the player list
 
         :returns player_df: DataFrame of all the players"""
 
-        return self.player_df
-
-    def get_players(self, pos):
-        """Gets the players with position
-
-        :param pos: the position of the players to get {'RB', 'WR', 'QB', 'TE', 'K', 'ST'}
-        :returns player_pos_df: DataFrame for all the players with position pos
-        """
-
-        player_pos_df = self.player_df.groupby('Position').get_group(pos)
-
-        return player_pos_df
+        if pos is None:
+            return self.player_df
+        else:
+            return self.player_df.groupby('Position').get_group(pos)
 
     def draft_player(self, player_rank, team):
         """Drafts a player to a team
@@ -104,14 +96,7 @@ class Draft:
         :param team: the team the player will be drafted to
         """
 
+        selection = self.teams[team].make_selection()
         self.teams[team].add_player(1)
 
         self.player_df.at[player_rank, 'Picked'] = True
-
-    def get_player_df(self):
-        """Returns the player_df
-
-        :return player_df: the DataFrame of players
-        """
-
-        return self.player_df

@@ -4,8 +4,6 @@ A fantasy football team
 Author: Zach Sahlin
 """
 
-import pandas as pd
-
 
 class Team:
     """A fantasy football team"""
@@ -24,7 +22,7 @@ class Team:
         """
 
         self.my_players.append(player_rank)
-        player_pos = self.draft.get_player_df().loc[player_rank]['Position']
+        player_pos = self.draft.get_players()['Position'][player_rank]
         if player_pos in self.empty_positions:
             self.empty_positions.remove(player_pos)
 
