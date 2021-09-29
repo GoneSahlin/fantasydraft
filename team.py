@@ -10,10 +10,12 @@ import pandas as pd
 class Team:
     """A fantasy football team"""
 
-    def __init__(self):
+    def __init__(self, draft, pos_list):
         """Constructor"""
 
-        my_players_df = pd.DataFrame()
+        self.draft = draft
+        self.my_players = []
+        self.empty_positions = pos_list
 
     def add_player(self):
         """Adds a player to the team

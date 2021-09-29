@@ -12,20 +12,25 @@ from team import Team
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams):
+    def __init__(self, num_teams, pos_list=None):
         """
         Constructor
 
         :param num_teams: number of teams in the league
         """
 
-        # declare vars
+        # default parameter
+        if pos_list is None:
+            pos_list = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'ST', 'K']
+
+        # declare variables
         self.player_df = pd.DataFrame()
         self.num_teams = num_teams
         self.teams = []
         self.next_team = 0
-        self.direction = 0  # which way the picks are moving in the snake draft
+        self.direction = 0      # which way the picks are moving in the snake draft
         self.round = 0
+        self.pos_list = pos_list
 
     def start(self):
         """Starts the draft"""
@@ -59,7 +64,7 @@ class Draft:
 
         self.teams = []
         for _ in range(num_teams):
-            self.teams.append(Team())
+            self.teams.append(Team(self))
         print(self.teams)
 
     def next_turn(self, team):
