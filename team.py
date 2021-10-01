@@ -40,4 +40,8 @@ class Team:
         :return:
         """
 
-        pass
+        draftable_players = self.draft.get_players()[~self.draft.get_players()['Picked']]
+
+        for index, row in draftable_players.iterrows():
+            if row['Position'] in self.empty_positions:
+                return index

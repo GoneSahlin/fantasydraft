@@ -97,6 +97,6 @@ class Draft:
         """
 
         selection = self.teams[team].make_selection()
-        self.teams[team].add_player(1)
+        self.teams[team].add_player(selection)
 
-        self.player_df.at[player_rank, 'Picked'] = True
+        self.player_df.at[selection, 'Picked'] = True
