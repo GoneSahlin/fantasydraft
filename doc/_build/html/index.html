@@ -50,19 +50,8 @@ Creates a fantasy football draft simulation</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="main.Draft">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">Draft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_teams</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">Draft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_teams</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft" title="Permalink to this definition">¶</a></dt>
 <dd><p>A fantasy football draft</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="main.Draft.calculate_draft_order">
-<span class="sig-name descname"><span class="pre">calculate_draft_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_teams</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.calculate_draft_order" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the draft order based on the number of teams using a snake draft</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>num_teams</strong> – number of teams in the league</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="main.Draft.create_teams">
 <span class="sig-name descname"><span class="pre">create_teams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_teams</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.create_teams" title="Permalink to this definition">¶</a></dt>
@@ -76,14 +65,11 @@ Creates a fantasy football draft simulation</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="main.Draft.draft_player">
-<span class="sig-name descname"><span class="pre">draft_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">team</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.draft_player" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">draft_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">team</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.draft_player" title="Permalink to this definition">¶</a></dt>
 <dd><p>Drafts a player to a team</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>player_name</strong> – the name of the player to be drafted</p></li>
-<li><p><strong>team</strong> – the team the player will be drafted to</p></li>
-</ul>
+<dd class="field-odd"><p><strong>team</strong> – the team the player will be drafted to</p>
 </dd>
 </dl>
 </dd></dl>
@@ -95,26 +81,14 @@ Creates a fantasy football draft simulation</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="main.Draft.get_next_team">
-<span class="sig-name descname"><span class="pre">get_next_team</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.get_next_team" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the team with the next pick</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="main.Draft.get_players">
-<span class="sig-name descname"><span class="pre">get_players</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.get_players" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the players with position</p>
+<span class="sig-name descname"><span class="pre">get_players</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.get_players" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the player list</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pos</strong> – the position of the players to get</p>
+<dt class="field-odd">Returns player_df</dt>
+<dd class="field-odd"><p>DataFrame of all the players</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="main.Draft.next_turn">
-<span class="sig-name descname"><span class="pre">next_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.next_turn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes the next turn in the draft</p>
 </dd></dl>
 
 <dl class="py method">
@@ -141,8 +115,41 @@ Creates a fantasy football draft simulation</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="main.Team">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">Team</span></span><a class="headerlink" href="#main.Team" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">Team</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">draft</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Team" title="Permalink to this definition">¶</a></dt>
 <dd><p>A fantasy football team</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="main.Team.add_player">
+<span class="sig-name descname"><span class="pre">add_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Team.add_player" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a player to the team</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>player_rank</strong> – the rank of the player to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.Team.get_empty_positions">
+<span class="sig-name descname"><span class="pre">get_empty_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.Team.get_empty_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the positions that haven’t been filled yet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns empty_positions</dt>
+<dd class="field-odd"><p>the positions on the team that are empty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.Team.make_selection">
+<span class="sig-name descname"><span class="pre">make_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.Team.make_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the next pick</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <div class="line-block">
