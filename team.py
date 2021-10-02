@@ -4,6 +4,8 @@ A fantasy football team
 Author: Zach Sahlin
 """
 
+import pandas as pd
+
 
 class Team:
     """A fantasy football team
@@ -12,7 +14,7 @@ class Team:
         """Constructor"""
 
         self.draft = draft
-        self.my_players = []
+        self.my_players_df = pd.DataFrame()
         self.empty_positions = pos_list.copy()
 
     def add_player(self, player_rank):
@@ -20,7 +22,7 @@ class Team:
 
         :param player_rank: the rank of the player to add
         """
-        self.my_players.append(player_rank)
+        self.my_players_df = self.my_players_df.append(self.draft.get_players().loc[player_rank, :])
         player_pos = self.draft.get_players()['Position'][player_rank]
         if player_pos in self.empty_positions:
             self.empty_positions.remove(player_pos)
@@ -46,3 +48,51 @@ class Team:
                 return index
             elif row['Position'] in ('RB', 'WR') and 'FLEX' in self.empty_positions:
                 return index
+
+    def calculate_total(self):
+        """Calculates the total projected points
+
+        :returns total_points: the total projected points for all starting players
+        """
+        def find_best_player(pos, benched_players_df):
+            """Finds the best player with the position
+
+            :param pos: Position code
+            :param benched_players_df: DataFrame of players on the bench
+            :returns selected_player_rank: the rank of the best player with the position
+            """
+
+            flex_set = {'RB', 'WR'}
+            if pos in set(benched_players_df['Position']):
+                pos_players_df = benched_players_df.groupby('Position').get_group(pos).copy()
+            elif pos == 'FLEX' and not flex_set.isdisjoint(set(benched_players_df['Position'])):
+                pos_players_df = pd.DataFrame(columns=benched_players_df.keys())
+                pos_groupby = benched_players_df.groupby('Position')
+                for position in flex_set:
+                    if position in list(benched_players_df['Position']):
+                        pos_players_df = pd.concat([pos_players_df, pos_groupby.get_group(position)])
+            else:
+                return 0
+
+            pos_players_df = pos_players_df.sort_values(by=['Total pts'], ascending=False)
+            return pos_players_df.iloc[0, :].name
+
+        pos_set = set(self.draft.pos_list)
+        benched_players_df = self.my_players_df
+        starting_players_df = pd.DataFrame()
+
+        for pos in pos_set:
+            for i in range(self.draft.pos_list.count(pos)):
+                selected_player_rank = find_best_player(pos, benched_players_df)
+                if selected_player_rank != 0:
+                    starting_players_df = starting_players_df.append(benched_players_df.loc[selected_player_rank, :])
+                    benched_players_df = benched_players_df.drop([selected_player_rank])
+                else:
+                    starting_players_df = starting_players_df.append(self.draft.get_players().loc[0, :])
+
+        total_points = starting_players_df['Total pts'].sum()
+
+        return total_points
+
+
+

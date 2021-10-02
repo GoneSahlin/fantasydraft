@@ -16,6 +16,7 @@ def main():
     """
     draft = Draft(10)
     draft.start()
+    draft.end()
 
 
 main()

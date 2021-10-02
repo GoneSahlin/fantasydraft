@@ -2,7 +2,7 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 1,Christian McCaffrey,,RB,334.2,22.3
 2,Dalvin Cook,,RB,306.1,21.9
 3,Alvin Kamara,,RB,296.7,19.8
-4,Saquon BarkleyQ,,RB,279.4,20
+4,Saquon Barkley,,RB,279.4,20
 5,Derrick Henry,,RB,286.3,19.1
 6,Travis Kelce,,TE,305.1,19.1
 7,Davante Adams,,WR,322.3,21.5
@@ -14,14 +14,14 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 13,Tyreek Hill,,WR,307.9,19.2
 14,Antonio Gibson,,RB,261.9,17.5
 15,Najee Harris,,RB,255.4,17
-16,Stefon DiggsQ,,WR,302.1,18.9
-17,DeAndre HopkinsQ,,WR,291.8,18.2
+16,Stefon Diggs,,WR,302.1,18.9
+17,DeAndre Hopkins,,WR,291.8,18.2
 18,Calvin Ridley,,WR,275.4,17.2
 19,DK Metcalf,,WR,278.9,17.4
-20,A.J. BrownQ,,WR,271.3,17
-21,Justin JeffersonQ,,WR,260.4,16.3
+20,A.J. Brown,,WR,271.3,17
+21,Justin Jefferson,,WR,260.4,16.3
 22,Joe Mixon,,RB,240.1,17.1
-23,Clyde Edwards-HelaireQ,,RB,240.7,16
+23,Clyde Edwards-Helaire,,RB,240.7,16
 24,Darren Waller,,TE,241.4,15.1
 25,Terry McLaurin,,WR,256.1,16
 26,Keenan Allen,,WR,253.8,15.9
@@ -34,16 +34,16 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 33,Robert Woods,,WR,246.2,15.4
 34,Mike Evans,,WR,243.9,15.2
 35,Amari Cooper,,WR,231.6,15.4
-36,D'Andre SwiftQ,,RB,231.5,15.4
+36,D'Andre Swift,,RB,231.5,15.4
 37,Chris Carson,,RB,226.7,16.2
-38,Adam ThielenQ,,WR,242,15.1
-39,Tyler LockettQ,,WR,244.2,15.3
+38,Adam Thielen,,WR,242,15.1
+39,Tyler Lockett,,WR,244.2,15.3
 40,Chris Godwin,,WR,225.8,15.1
 41,Cooper Kupp,,WR,235,14.7
 42,Diontae Johnson,,WR,228.2,14.3
-43,Julio JonesQ,,WR,221.6,14.8
+43,Julio Jones,,WR,221.6,14.8
 44,DJ Moore,,WR,225.2,14.1
-45,Brandon AiyukQ,,WR,217.9,13.6
+45,Brandon Aiyuk,,WR,217.9,13.6
 46,Tee Higgins,,WR,214.8,13.4
 47,Josh Jacobs,,RB,227.3,15.2
 48,Chase Edmonds,,RB,211.3,14.1
@@ -53,13 +53,13 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 52,Javonte Williams,,RB,174.4,11.6
 53,Kareem Hunt,,RB,182.3,12.2
 54,Myles Gaskin,,RB,190.3,12.7
-55,Kenny GolladayQ,,WR,213,14.2
-56,Odell Beckham Jr.Q,,WR,198.8,14.2
+55,Kenny Golladay,,WR,213,14.2
+56,Odell Beckham Jr.,,WR,198.8,14.2
 57,Robby Anderson,,WR,216.7,13.5
 58,JuJu Smith-Schuster,,WR,212.4,13.3
 59,Courtland Sutton,,WR,205.3,13.7
 60,Mark Andrews,,TE,200.4,12.5
-61,T.J. HockensonQ,,TE,199.7,12.5
+61,T.J. Hockenson,,TE,199.7,12.5
 62,Kyle Pitts,,TE,190.4,11.9
 63,Kyler Murray,,QB,356.7,22.3
 64,Jerry Jeudy,,WR,212.1,13.3
@@ -68,7 +68,7 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 67,Dak Prescott,,QB,343.9,21.5
 68,Lamar Jackson,,QB,334.1,22.3
 69,Mike Davis,,RB,202.6,13.5
-70,Darrell Henderson Jr.Q,,RB,196.9,13.1
+70,Darrell Henderson Jr.,,RB,196.9,13.1
 71,Ja'Marr Chase,,WR,205.2,12.8
 72,William Fuller VSSPD,,WR,193.2,13.8
 73,Tyler Boyd,,WR,210.1,13.1
@@ -80,16 +80,16 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 79,Aaron Rodgers,,QB,322,20.1
 80,Russell Wilson,,QB,316.9,19.8
 81,Justin Herbert,,QB,308.7,19.3
-82,Noah FantQ,,TE,155.7,9.7
+82,Noah Fant,,TE,155.7,9.7
 83,Corey Davis,,WR,200.5,12.5
-84,Marvin Jones Jr.Q,,WR,199.5,13.3
-85,DJ Chark Jr.Q,,WR,193,12.1
-86,Michael ThomasO,,WR,171.7,15.6
+84,Marvin Jones Jr.,,WR,199.5,13.3
+85,DJ Chark Jr.,,WR,193,12.1
+86,Michael Thomas,,WR,171.7,15.6
 87,Damien Harris,,RB,175.6,11.7
 88,Raheem Mostert,,RB,157.2,12.1
 89,Jarvis Landry,,WR,194.8,12.2
 90,Marquise Brown,,WR,192.9,12.1
-91,Curtis SamuelQ,,WR,195.7,12.2
+91,Curtis Samuel,,WR,195.7,12.2
 92,Mike Williams,,WR,187,11.7
 93,Antonio Brown,,WR,175.9,11.7
 94,Sony Michel,,RB,156.9,10.5
@@ -109,7 +109,7 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 108,Mike Gesicki,,TE,142.5,8.9
 109,Tom Brady,,QB,320.4,21.4
 110,Nyheim Hines,,RB,158,10.5
-111,Michael CarterQ,,RB,135.3,9
+111,Michael Carter,,RB,135.3,9
 112,Ronald Jones II,,RB,139,9.3
 113,Trey Sermon,,RB,122.6,8.2
 114,Jalen Hurts,,QB,293.9,19.6
@@ -123,26 +123,26 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 122,Jalen Reagor,,K,168.5,10.5
 123,David Johnson,,K,138.9,9.3
 124,James White,,K,145.7,9.7
-125,Tyrell WilliamsQ,,K,163.5,10.9
+125,Tyrell Williams,,K,163.5,10.9
 126,Mecole Hardman,,WR,160.8,10.1
 127,Darnell Mooney,,WR,158.2,9.9
 128,Parris Campbell,,WR,146.7,10.5
 129,Elijah Moore,,WR,157.2,9.8
 130,Tyler Higbee,,TE,139.1,8.7
 131,Austin Hooper,,TE,136.1,8.5
-132,Hunter HenryQ,,TE,124.3,8.3
+132,Hunter Henry,,TE,124.3,8.3
 133,Joe Burrow,,QB,282.4,17.6
 134,Baker Mayfield,,QB,274.3,17.1
 135,Tua Tagovailoa,,QB,276.2,18.4
 136,Phillip Lindsay,,RB,117.5,8.4
 137,J.D. McKissic,,RB,145.5,9.7
 138,Tony Pollard,,RB,112.6,7.5
-139,Alexander MattisonQ,,RB,113.4,7.6
+139,Alexander Mattison,,RB,113.4,7.6
 140,Malcolm Brown,,RB,115.8,7.7
 141,Giovani Bernard,,RB,115.6,7.7
 142,Rhamondre Stevenson,,RB,72.3,4.8
 143,Rob Gronkowski,,TE,124.9,7.8
-144,Evan EngramQ,,TE,106.8,8.2
+144,Evan Engram,,TE,106.8,8.2
 145,Cole Kmet,,TE,119,7.4
 146,Trevor Lawrence,,QB,269.7,16.9
 147,Matt Ryan,,QB,268.6,16.8
@@ -166,7 +166,7 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 165,Eric Ebron,,TE,117,7.8
 166,Jared Cook,,TE,114,7.6
 167,Zach Ertz,,TE,112.7,7.5
-168,Trey LanceQ,,QB,230.1,14.4
+168,Trey Lance,,QB,230.1,14.4
 169,Buccaneers D/ST,,ST,140.9,8.3
 170,Steelers D/ST,,ST,115.8,6.8
 171,Ravens D/ST,,ST,121.2,7.1
@@ -199,3 +199,4 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 198,Justin Jackson,,RB,87,5.8
 199,Damien Williams,,RB,65.9,4.4
 200,Chuba Hubbard,,RB,59.5,4
+0,EMPTY,,,0,0

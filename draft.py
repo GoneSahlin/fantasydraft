@@ -50,13 +50,10 @@ class Draft:
         for _ in range(num_teams):
             self.teams.append(Team(self, self.pos_list))
 
-    def end(self):
-        """Ends the draft and projects rankings"""
-        pass
-
     def get_players(self, pos=None):
         """Gets the player list
 
+        :param pos: the position of the players to get, default None to return all players
         :returns player_df: DataFrame of all the players"""
 
         if pos is None:
@@ -98,3 +95,10 @@ class Draft:
                     self.direction = 0
                     self.round += 1
 
+    def end(self):
+        """Ends the draft and projects rankings
+        """
+        totals = []
+        for team in self.teams:
+            totals.append(team.calculate_total())
+        print(totals)
