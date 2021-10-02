@@ -5,6 +5,7 @@ Author: Zach Sahlin
 """
 
 import pandas as pd
+from collections import OrderedDict
 
 
 class Team:
@@ -22,7 +23,12 @@ class Team:
 
         :param player_rank: the rank of the player to add
         """
-        self.my_players_df = self.my_players_df.append(self.draft.get_players().loc[player_rank, :])
+        if player_rank in self.draft.get_players().index:
+            self.my_players_df = self.my_players_df.append(self.draft.get_players().loc[player_rank, :])
+        else:
+            self.my_players_df = self.my_players_df.append(self.draft.get_players().loc[0, :])
+            return
+
         player_pos = self.draft.get_players()['Position'][player_rank]
         if player_pos in self.empty_positions:
             self.empty_positions.remove(player_pos)
@@ -77,7 +83,10 @@ class Team:
             pos_players_df = pos_players_df.sort_values(by=['Total pts'], ascending=False)
             return pos_players_df.iloc[0, :].name
 
-        pos_set = set(self.draft.pos_list)
+        pos_set = list(OrderedDict.fromkeys(self.draft.pos_list))
+        if 'FLEX' in pos_set:
+            pos_set.append(pos_set.pop(pos_set.index('FLEX')))
+
         benched_players_df = self.my_players_df
         starting_players_df = pd.DataFrame()
 

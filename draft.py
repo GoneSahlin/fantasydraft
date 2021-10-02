@@ -101,4 +101,6 @@ class Draft:
         totals = []
         for team in self.teams:
             totals.append(team.calculate_total())
+            print(team.my_players_df)
         print(totals)
+

@@ -85,8 +85,11 @@ Creates a fantasy football draft simulation</p>
 <span class="sig-name descname"><span class="pre">get_players</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.Draft.get_players" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the player list</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns player_df</dt>
-<dd class="field-odd"><p>DataFrame of all the players</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> – the position of the players to get, default None to return all players</p>
+</dd>
+<dt class="field-even">Returns player_df</dt>
+<dd class="field-even"><p>DataFrame of all the players</p>
 </dd>
 </dl>
 </dd></dl>
@@ -124,6 +127,17 @@ Creates a fantasy football draft simulation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>player_rank</strong> – the rank of the player to add</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.Team.calculate_total">
+<span class="sig-name descname"><span class="pre">calculate_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.Team.calculate_total" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the total projected points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns total_points</dt>
+<dd class="field-odd"><p>the total projected points for all starting players</p>
 </dd>
 </dl>
 </dd></dl>
