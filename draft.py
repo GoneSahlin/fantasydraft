@@ -54,8 +54,8 @@ class Draft:
         """Gets the player list
 
         :param pos: the position of the players to get, default None to return all players
-        :returns player_df: DataFrame of all the players"""
-
+        :returns player_df: DataFrame of all the players
+        """
         if pos is None:
             return self.player_df
         else:
@@ -66,7 +66,6 @@ class Draft:
 
         :param team: the team the player will be drafted to
         """
-
         selection = self.teams[team].make_selection()
         self.teams[team].add_player(selection)
 

@@ -55,6 +55,11 @@ class Team:
             elif row['Position'] in ('RB', 'WR') and 'FLEX' in self.empty_positions:
                 return index
 
+        # if no players that fit lineup
+        first_index = draftable_players.index[0]
+        return first_index
+
+
     def calculate_total(self):
         """Calculates the total projected points
 
