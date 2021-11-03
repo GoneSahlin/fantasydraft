@@ -11,12 +11,13 @@ from collections import OrderedDict
 class Team:
     """A fantasy football team
     """
-    def __init__(self, draft, pos_list):
+    def __init__(self, draft, pos_list, team_number):
         """Constructor"""
 
         self.draft = draft
         self.my_players_df = pd.DataFrame()
         self.empty_positions = pos_list.copy()
+        self.team_number = team_number
 
     def add_player(self, player_rank):
         """adds a player to the team

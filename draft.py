@@ -47,8 +47,8 @@ class Draft:
         :param num_teams: number of teams in the league
         """
         self.teams = []
-        for _ in range(num_teams):
-            self.teams.append(Team(self, self.pos_list))
+        for i in range(num_teams):
+            self.teams.append(Team(self, self.pos_list, i))
 
     def get_players(self, pos=None):
         """Gets the player list
