@@ -37,8 +37,8 @@ class Draft:
 
         :param filename: name of the file with the player data
         """
-        this_directory = os.path.dirname(__file__)
-        self.player_df = pd.read_csv(os.path.join(this_directory, filename), index_col="RANK")
+        # this_directory = os.path.dirname(__file__)
+        self.player_df = pd.read_csv(filename, index_col="RANK")
         self.player_df["Picked"] = False
 
     def create_teams(self, num_teams):
@@ -74,12 +74,12 @@ class Draft:
     def start(self):
         """Starts the draft
         """
-        self.read_players('espn_fantasy_projections.csv')   # read in players
-        self.create_teams(self.num_teams)                   # create teams
+        self.read_players(os.path.join("data", 'espn_fantasy_projections.csv'))  # read in players
+        self.create_teams(self.num_teams)  # create teams
 
         # drafts the players
         while self.round < len(self.pos_list):
-            self.draft_player(self.cur_team)    # draft player
+            self.draft_player(self.cur_team)  # draft player
 
             if self.direction == 0:
                 if self.cur_team < self.num_teams - 1:
