@@ -8,6 +8,7 @@ import pandas as pd
 import os
 
 from team import Team
+from simple_team import SimpleTeam
 from player import Player
 
 
@@ -63,7 +64,7 @@ class Draft:
                     self.ks.append(player)
                     continue
                 case _:
-                    print("Incorrect position")
+                    print(f"Incorrect position {player.position} for Player: {player.name}")
         
 
     def read_players(self, filename):
@@ -86,11 +87,13 @@ class Draft:
 
         :param num_teams: number of teams in the league
         """
-        self.teams = []
+        teams = []
         for _ in range(num_teams):
-            self.teams.append(Team(self, self.pos_list))
+            teams.append(SimpleTeam(self, self.pos_list))
 
-    def get_players(self, pos):
+        return teams
+
+    def get_players(self, pos=None):
         """Gets the player list
 
         :param pos: the position of the players to get, default None to return all players
@@ -135,7 +138,7 @@ class Draft:
             self.draft_player(self.teams[self.cur_team_index])  # draft player
 
             if self.direction == 0:
-                if self.cur_team_index < self.teams - 1:
+                if self.cur_team_index < self.num_teams - 1:
                     self.cur_team_index += 1
                 else:
                     self.direction = 1
@@ -153,6 +156,4 @@ class Draft:
         totals = []
         for team in self.teams:
             totals.append(team.calculate_total())
-            print(team.players)
         print(totals)
-

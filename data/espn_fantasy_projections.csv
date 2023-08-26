@@ -98,7 +98,7 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 97,Kenyan Drake,,RB,172.4,11.5
 98,Leonard Fournette,,RB,151.9,10.1
 99,James Conner,,RB,151.7,10.8
-100,Melvin Gordon III,,en,148.6,9.9
+100,Melvin Gordon III,,RB,148.6,9.9
 101,AJ Dillon,,RB,148.6,9.9
 102,Jamaal Williams,,RB,150.6,10
 103,Zack Moss,,RB,147.1,9.8
@@ -199,4 +199,3 @@ RANK,PLAYER,Status,Position,Total pts,Average pts
 198,Justin Jackson,,RB,87,5.8
 199,Damien Williams,,RB,65.9,4.4
 200,Chuba Hubbard,,RB,59.5,4
-0,EMPTY,,,0,0
