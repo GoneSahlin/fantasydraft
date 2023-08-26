@@ -9,6 +9,7 @@ import os
 
 from team import Team
 from simple_team import SimpleTeam
+from user_team import UserTeam
 from player import Player
 
 
