@@ -16,7 +16,7 @@ from player import Player
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams, pos_list=None):
+    def __init__(self, num_teams, pos_list=None, flex_options=None):
         """
         Constructor
 
@@ -27,12 +27,16 @@ class Draft:
         if pos_list is None:
             pos_list = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'ST', 'K']
 
+        if flex_options is None:
+            flex_options = ["RB", "WR", "FLEX"]
+
         # declare variables
         self.num_teams = num_teams
         self.cur_team_index = 0
         self.direction = 0      # which way the picks are moving in the snake draft, 0 is forwards, 1 is backwards
         self.round = 0
         self.pos_list = pos_list
+        self.flex_options = flex_options
 
         self.teams = self.create_teams(num_teams)
         self.players = self.read_players(os.path.join("data", "espn_fantasy_projections.csv"))

@@ -4,7 +4,6 @@ A fantasy football team
 Author: Zach Sahlin
 """
 
-import pandas as pd
 from abc import ABC, abstractmethod
 
 from player import Player
@@ -30,7 +29,7 @@ class Team(ABC):
 
         if player.position in self.empty_positions:
             self.empty_positions.remove(player.position)
-        elif player.position in ("RB", "WR") and "FLEX" in self.empty_positions:
+        elif player.position in self.draft.flex_options and "FLEX" in self.empty_positions:
             self.empty_positions.remove("FLEX")
 
         self.postiion_counts[player.position] += 1
@@ -63,7 +62,7 @@ class Team(ABC):
             if player.position in positions_available:
                 positions_available.remove(player.position)
                 total_points += player.points
-            elif player.position in ("RB", "WR") and "FLEX" in positions_available:
+            elif player.position in self.draft.flex_options and "FLEX" in positions_available:
                 positions_available.remove("FLEX")
                 total_points += player.points
 
