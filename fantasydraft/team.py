@@ -7,6 +7,8 @@ Author: Zach Sahlin
 import pandas as pd
 from collections import OrderedDict
 
+from player import Player
+
 
 class Team:
     """A fantasy football team
@@ -42,7 +44,7 @@ class Team:
         """
         return self.empty_positions
 
-    def make_selection(self):
+    def make_selection(self) -> Player:
         """Makes the next pick
 
         :return:

@@ -3,7 +3,7 @@ MODULE = fantasydraft
 
 $(VENV): setup.cfg
 	python3 -m venv $(VENV)
-	$(VENV)/bin/pip install -e $(MODULE)[dev]
+	$(VENV)/bin/pip install -e .[dev]
 	touch $(VENV)
 
 .PHONY: run
