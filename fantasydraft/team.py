@@ -98,11 +98,8 @@ class Team(ABC):
                 else:
                     mean_points = np.mean([player.points for player in self.draft.get_players(pos)[:3]])
                 
-                print(mean_points, pos)
                 total_points += mean_points * weight / 100
 
-
-            
         return total_points
 
         # positions_available = self.draft.pos_list.copy()

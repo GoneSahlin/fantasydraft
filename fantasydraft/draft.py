@@ -16,7 +16,7 @@ from player import Player
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None):
+    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, player_filename="data/players.csv"):
         """
         Constructor
 
@@ -50,7 +50,7 @@ class Draft:
         self.weights = weights
 
         self.teams = self.create_teams(num_teams)
-        self.players = self.read_players(os.path.join("data", "espn_fantasy_projections.csv"))
+        self.players = self.read_players(player_filename)
 
         # create free agent position lists
         self.qbs = []
@@ -88,12 +88,11 @@ class Draft:
 
         :param filename: name of the file with the player data
         """
-        # this_directory = os.path.dirname(__file__)
-        player_df = pd.read_csv(filename, index_col="RANK")
+        player_df = pd.read_csv(filename)
 
         players = []
-        for index, row in player_df.iterrows():
-            players.append(Player(row['PLAYER'], row['Position'], row['Total pts'], index))
+        for _, row in player_df.iterrows():
+            players.append(Player(row['name'], row['position'], row['points'], row['rank']))
 
         return players
 
