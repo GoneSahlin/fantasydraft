@@ -14,13 +14,34 @@ from player import Player
 class Team(ABC):
     """A fantasy football team
     """
-    def __init__(self, draft, pos_list):
+    def __init__(self, draft, roster=None, empty_positions=None, position_counts=None):
         """Constructor"""
 
         self.draft = draft
-        self.roster = []
-        self.empty_positions = pos_list.copy()
-        self.postiion_counts = {"QB": 0, "RB": 0, "WR": 0, "TE": 0, "ST": 0, "K": 0}
+
+        if roster is None:
+            self.roster = []
+        else:
+            self.roster = roster
+
+        if empty_positions is None:
+            self.empty_positions = draft.pos_list.copy()
+        else:
+            self.empty_positions = empty_positions
+
+        if position_counts is None:
+            self.position_counts = {"QB": 0, "RB": 0, "WR": 0, "TE": 0, "ST": 0, "K": 0}
+        else:
+            self.position_counts = position_counts
+
+    def copy(self):
+        new_roster = self.roster.copy()
+        new_empty_positions = self.empty_positions.copy()
+        new_position_counts = self.position_counts.copy()
+        
+        new_team = Team(self.draft, roster=new_roster, empty_positions=new_empty_positions, position_counts=new_position_counts)
+
+        return new_team
 
     def add_player(self, player: Player):
         """adds a player to the team
@@ -34,7 +55,7 @@ class Team(ABC):
         elif player.position in self.draft.flex_options and "FLEX" in self.empty_positions:
             self.empty_positions.remove("FLEX")
 
-        self.postiion_counts[player.position] += 1
+        self.position_counts[player.position] += 1
 
     def get_empty_positions(self):
         """Gets the positions that haven't been filled yet

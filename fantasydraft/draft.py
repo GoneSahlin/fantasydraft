@@ -5,7 +5,7 @@ Author: Zach Sahlin
 """
 
 import pandas as pd
-import os
+from copy import deepcopy
 
 from team import Team
 from simple_team import SimpleTeam
@@ -16,7 +16,7 @@ from player import Player
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, player_filename="data/players.csv"):
+    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, player_filename="data/players.csv", players=None, player_position_dict=None, round=0, cur_team_index=0, direction=0, teams=None):
         """
         Constructor
 
@@ -41,46 +41,50 @@ class Draft:
 
         # declare variables
         self.num_teams = num_teams
-        self.cur_team_index = 0
-        self.direction = 0      # which way the picks are moving in the snake draft, 0 is forwards, 1 is backwards
-        self.round = 0
+        self.cur_team_index = cur_team_index
+        self.direction = direction      # which way the picks are moving in the snake draft, 0 is forwards, 1 is backwards
+        self.round = round
         self.total_rounds = total_rounds
         self.pos_list = pos_list
         self.flex_options = flex_options
         self.weights = weights
 
-        self.teams = self.create_teams(num_teams)
-        self.players = self.read_players(player_filename)
+        if teams is None:
+            self.teams = self.create_teams(num_teams)
+        else:
+            self.teams = teams
+
+        if players is None:
+            self.players = self.read_players(player_filename)
+        else:
+            self.players = players
 
         # create free agent position lists
-        self.qbs = []
-        self.rbs = []
-        self.wrs = []
-        self.tes = []
-        self.sts = []
-        self.ks = []
-        for player in self.players:
-            match player.position:
-                case 'QB':
-                    self.qbs.append(player)
-                    continue
-                case 'RB':
-                    self.rbs.append(player)
-                    continue
-                case 'WR':
-                    self.wrs.append(player)
-                    continue
-                case 'TE':
-                    self.tes.append(player)
-                    continue
-                case 'ST':
-                    self.sts.append(player)
-                    continue
-                case 'K':
-                    self.ks.append(player)
-                    continue
-                case _:
+        if player_position_dict is None:
+            self.player_postition_dict = {"QB": [], "RB": [], "WR": [], "TE": [], "ST": [], "K": []}
+        
+            for player in self.players:
+                if player.position in self.player_postition_dict:
+                    self.player_postition_dict[player.position].append(player)
+                else:
                     print(f"Incorrect position {player.position} for Player: {player.name}")
+        else:
+            self.player_postition_dict = player_position_dict
+
+    
+    def copy(self):
+        new_players = self.players.copy()
+        new_player_position_dict = deepcopy(self.player_postition_dict)
+        new_teams = self.teams.
+
+
+        new_draft = Draft(self.num_teams, self.total_rounds, pos_list=self.pos_list, flex_options=self.flex_options,
+                          weights=self.weights, players=new_players, player_position_dict=new_player_position_dict, 
+                          round=self.round, cur_team_index=self.cur_team_index, direction=self.direction, teams=new_teams)
+        
+        
+        
+        return new_draft
         
 
     def read_players(self, filename):
@@ -104,7 +108,7 @@ class Draft:
         """
         teams = []
         for _ in range(num_teams):
-            teams.append(SimpleTeam(self, self.pos_list))
+            teams.append(SimpleTeam(self))
 
         return teams
 
@@ -114,24 +118,14 @@ class Draft:
         :param pos: the position of the players to get, default None to return all players
         :returns player_df: DataFrame of all the players
         """
-    
-        match pos:
-            case None:
-                return self.players
-            case 'QB':
-                return self.qbs
-            case 'RB':
-                return self.rbs
-            case 'WR':
-                return self.wrs
-            case 'TE':
-                return self.tes
-            case 'ST':
-                return self.sts
-            case 'K':
-                return self.ks
-            case _:
-                print(f"Incorrect position: {pos}")
+        if pos is None:
+            return self.players
+        
+        if pos in self.player_postition_dict:
+            return self.player_position_dict[pos]
+        else:
+            print(f"Incorrect position: {pos}")
+        
 
     def draft_player(self, team: Team):
         """Drafts a player to a team
