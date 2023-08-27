@@ -5,6 +5,8 @@ Author: Zach Sahlin
 """
 
 from abc import ABC, abstractmethod
+from copy import deepcopy
+import numpy as np
 
 from player import Player
 
@@ -52,18 +54,65 @@ class Team(ABC):
         pass
 
     def calculate_total(self) -> int:
-        """Calculates the total projected points
+        """Calculates the total projected points based off of the weights
 
         :returns total_points: the total projected points for all starting players
         """
-        positions_available = self.draft.pos_list.copy()
-        total_points = 0
-        for player in sorted(self.roster, key=lambda player: player.points):
-            if player.position in positions_available:
-                positions_available.remove(player.position)
-                total_points += player.points
-            elif player.position in self.draft.flex_options and "FLEX" in positions_available:
-                positions_available.remove("FLEX")
-                total_points += player.points
 
+        weights_left = deepcopy(self.draft.weights)
+
+        total_points = 0
+        for player in self.roster:
+            # move to highest weight available for position
+            pos_weights = weights_left[player.position]
+            if pos_weights:
+                pos_weight = pos_weights[0]
+            else:
+                pos_weight = 0
+
+            flex_weight = 0
+            if player.position in self.draft.flex_options:
+                flex_weights = weights_left["FLEX"]
+                if flex_weights:
+                    flex_weight = flex_weights[0]
+
+            if not flex_weight or pos_weight >= flex_weight:
+                weight = pos_weight
+                if pos_weight:
+                    pos_weights.pop(0)
+            else:
+                weight = flex_weight
+                if flex_weight:
+                    flex_weights.pop(0)
+
+            total_points += player.points * weight / 100
+
+        # for remaining weights use the mean of the top 3 free agents
+        for pos in weights_left:
+            for weight in weights_left[pos]:
+                if pos == 'FLEX':
+                    flex_player_points = []
+                    for flex_pos in self.draft.flex_options:
+                        flex_player_points.extend([player.points for player in self.draft.get_players(flex_pos)[:3]])
+                    mean_points = np.mean(sorted(flex_player_points)[:3])
+                else:
+                    mean_points = np.mean([player.points for player in self.draft.get_players(pos)[:3]])
+                
+                print(mean_points, pos)
+                total_points += mean_points * weight / 100
+
+
+            
         return total_points
+
+        # positions_available = self.draft.pos_list.copy()
+        # total_points = 0
+        # for player in sorted(self.roster, key=lambda player: player.points):
+        #     if player.position in positions_available:
+        #         positions_available.remove(player.position)
+        #         total_points += player.points
+        #     elif player.position in self.draft.flex_options and "FLEX" in positions_available:
+        #         positions_available.remove("FLEX")
+        #         total_points += player.points
+
+        # return total_points

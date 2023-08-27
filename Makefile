@@ -10,6 +10,10 @@ $(VENV): setup.cfg
 run: $(VENV)
 	$(VENV)/bin/python3 $(MODULE)/main.py
 
+.PHONY: collect
+collect: $(VENV)
+	$(VENV)/bin/python3 scripts/collect_data.py
+
 .PHONY: test
 test: $(VENV)
 	$(VENV)/bin/pytest $(MODULE)

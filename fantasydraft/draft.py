@@ -16,7 +16,7 @@ from player import Player
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams, pos_list=None, flex_options=None):
+    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None):
         """
         Constructor
 
@@ -28,15 +28,26 @@ class Draft:
             pos_list = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'ST', 'K']
 
         if flex_options is None:
-            flex_options = ["RB", "WR", "FLEX"]
+            flex_options = ["RB", "WR", "TE"]
+
+        if weights is None:
+            weights = {'QB': [60, 40],
+                       'RB': [70, 70, 40, 20],
+                       'WR': [70, 70, 40, 20],
+                       'TE': [60, 40],
+                       'FLEX': [60, 40],
+                       'ST': [60, 30, 10],
+                       'K': [50, 20, 20, 10]}
 
         # declare variables
         self.num_teams = num_teams
         self.cur_team_index = 0
         self.direction = 0      # which way the picks are moving in the snake draft, 0 is forwards, 1 is backwards
         self.round = 0
+        self.total_rounds = total_rounds
         self.pos_list = pos_list
         self.flex_options = flex_options
+        self.weights = weights
 
         self.teams = self.create_teams(num_teams)
         self.players = self.read_players(os.path.join("data", "espn_fantasy_projections.csv"))
@@ -121,7 +132,7 @@ class Draft:
             case 'K':
                 return self.ks
             case _:
-                print("Incorrect position")
+                print(f"Incorrect position: {pos}")
 
     def draft_player(self, team: Team):
         """Drafts a player to a team
@@ -139,7 +150,7 @@ class Draft:
         """Starts the draft
         """
         # drafts the players
-        while self.round < len(self.pos_list):
+        while self.round < self.total_rounds:
             self.draft_player(self.teams[self.cur_team_index])  # draft player
 
             if self.direction == 0:
@@ -162,3 +173,6 @@ class Draft:
         for team in self.teams:
             totals.append(team.calculate_total())
         print(totals)
+
+        # for team in self.teams:
+        #     print([player.points for player in team.roster])

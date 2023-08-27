@@ -14,7 +14,7 @@ def main():
 
     :return: none
     """
-    draft = Draft(12)
+    draft = Draft(12, 16)
     draft.start()
     draft.end()
 
