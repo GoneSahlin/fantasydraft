@@ -41,8 +41,7 @@ class State():
 
         new_state.draft.draft_player(action)
 
-        return new_state        
-        
+        return new_state
 
     def isTerminal(self):
         """Returns True if this state is a terminal state

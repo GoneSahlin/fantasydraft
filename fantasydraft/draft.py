@@ -163,7 +163,7 @@ class Draft:
 
             self.draft_player(selection)  # draft player
 
-            print(selection)
+            print(selection.name)
 
     def end(self):
         """Ends the draft and projects rankings
