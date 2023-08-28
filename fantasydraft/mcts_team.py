@@ -64,10 +64,11 @@ class State():
 
 
 class MCTSTeam(Team):
+    name = "MCTS"
 
     def make_selection(self) -> Player:
         initialState = State(self.draft, self.draft.cur_team_index)
-        searcher = mcts(timeLimit=1000)
+        searcher = mcts(timeLimit=15000)
         action = searcher.search(initialState=initialState)
 
         return action

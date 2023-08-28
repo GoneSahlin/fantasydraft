@@ -5,7 +5,6 @@ Author: Zach Sahlin
 """
 
 import pandas as pd
-from copy import deepcopy
 import numpy as np
 
 from team import Team
@@ -13,19 +12,18 @@ from simple_team import SimpleTeam
 from user_team import UserTeam
 from mcts_team import MCTSTeam
 from player import Player
-from utils import create_player_pos_dict
+from utils import create_player_pos_dict, read_players
 
 
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, player_filename="data/players.csv", players=None, player_pos_dict=None, round=0, cur_team_index=0, direction=0, teams=None):
+    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, players=None, player_pos_dict=None, round=0, cur_team_index=0, direction=0, teams=None):
         """
         Constructor
 
         :param num_teams: number of teams in the league
         """
-
         # default parameter
         if pos_list is None:
             pos_list = ['QB', 'RB', 'RB', 'WR', 'WR', 'TE', 'FLEX', 'ST', 'K']
@@ -51,14 +49,15 @@ class Draft:
         self.pos_list = pos_list
         self.flex_options = flex_options
         self.weights = weights
+        self.teams = teams
 
-        if teams is None:
-            self.teams = self.create_teams(num_teams)
-        else:
-            self.teams = teams
+        # if teams is None:
+        #     self.teams = self.create_teams(num_teams)
+        # else:
+        #     self.teams = teams
 
         if players is None:
-            self.players = self.read_players(player_filename)
+            self.players = read_players()
         else:
             self.players = players
 
@@ -83,32 +82,7 @@ class Draft:
             team.draft=new_draft
         
         return new_draft
-        
 
-    def read_players(self, filename):
-        """Reads in the player data from a csv file
-
-        :param filename: name of the file with the player data
-        """
-        player_df = pd.read_csv(filename)
-
-        players = []
-        for _, row in player_df.iterrows():
-            players.append(Player(row['name'], row['position'], row['points'], row['rank']))
-
-        return players
-
-        
-    def create_teams(self, num_teams):
-        """Creates the teams in the draft
-
-        :param num_teams: number of teams in the league
-        """
-        teams = []
-        for _ in range(num_teams):
-            teams.append(MCTSTeam(self))
-
-        return teams
 
     def get_players(self, pos=None):
         """Gets the player list
@@ -174,4 +148,5 @@ class Draft:
         print(totals)
 
         # for team in self.teams:
-        #     print([player.points for player in team.roster])
+        #     print([player.points for player in team.roster])               
+

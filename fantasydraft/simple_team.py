@@ -2,6 +2,8 @@ from fantasydraft.player import Player
 from team import Team
 
 class SimpleTeam(Team):
+    name = "Simple"
+    
     def make_selection(self) -> Player:
         players = self.draft.get_players().copy()
 

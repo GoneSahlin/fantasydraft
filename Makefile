@@ -14,6 +14,10 @@ run: $(VENV)
 collect: $(VENV)
 	$(VENV)/bin/python3 scripts/collect_data.py
 
+.PHONY: plot
+plot: $(VENV)
+	$(VENV)/bin/python3 scripts/plot.py
+
 .PHONY: test
 test: $(VENV)
 	$(VENV)/bin/pytest $(MODULE)
