@@ -39,7 +39,7 @@ class Team(ABC):
         new_empty_positions = self.empty_positions.copy()
         new_position_counts = self.position_counts.copy()
         
-        new_team = Team(self.draft, roster=new_roster, empty_positions=new_empty_positions, position_counts=new_position_counts)
+        new_team = self.__class__(self.draft, roster=new_roster, empty_positions=new_empty_positions, position_counts=new_position_counts)
 
         return new_team
 
@@ -74,7 +74,7 @@ class Team(ABC):
         """
         pass
 
-    def calculate_total(self) -> int:
+    def calculate_total(self):
         """Calculates the total projected points based off of the weights
 
         :returns total_points: the total projected points for all starting players

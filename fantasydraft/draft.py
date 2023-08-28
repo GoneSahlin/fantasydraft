@@ -6,17 +6,20 @@ Author: Zach Sahlin
 
 import pandas as pd
 from copy import deepcopy
+import numpy as np
 
 from team import Team
 from simple_team import SimpleTeam
 from user_team import UserTeam
+from mcts_team import MCTSTeam
 from player import Player
+from utils import create_player_pos_dict
 
 
 class Draft:
     """A fantasy football draft"""
 
-    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, player_filename="data/players.csv", players=None, player_position_dict=None, round=0, cur_team_index=0, direction=0, teams=None):
+    def __init__(self, num_teams, total_rounds=16, pos_list=None, flex_options=None, weights=None, player_filename="data/players.csv", players=None, player_pos_dict=None, round=0, cur_team_index=0, direction=0, teams=None):
         """
         Constructor
 
@@ -60,29 +63,24 @@ class Draft:
             self.players = players
 
         # create free agent position lists
-        if player_position_dict is None:
-            self.player_postition_dict = {"QB": [], "RB": [], "WR": [], "TE": [], "ST": [], "K": []}
-        
-            for player in self.players:
-                if player.position in self.player_postition_dict:
-                    self.player_postition_dict[player.position].append(player)
-                else:
-                    print(f"Incorrect position {player.position} for Player: {player.name}")
+        if player_pos_dict is None:
+            self.player_pos_dict = create_player_pos_dict(self.players)
         else:
-            self.player_postition_dict = player_position_dict
-
+            self.player_pos_dict = player_pos_dict
     
     def copy(self):
         new_players = self.players.copy()
-        new_player_position_dict = deepcopy(self.player_postition_dict)
-        new_teams = self.teams.
 
+        new_player_pos_dict = create_player_pos_dict(new_players)
+
+        new_teams = [team.copy() for team in self.teams]
 
         new_draft = Draft(self.num_teams, self.total_rounds, pos_list=self.pos_list, flex_options=self.flex_options,
-                          weights=self.weights, players=new_players, player_position_dict=new_player_position_dict, 
+                          weights=self.weights, players=new_players, player_pos_dict=new_player_pos_dict, 
                           round=self.round, cur_team_index=self.cur_team_index, direction=self.direction, teams=new_teams)
         
-        
+        for team in new_teams:
+            team.draft=new_draft
         
         return new_draft
         
@@ -108,7 +106,7 @@ class Draft:
         """
         teams = []
         for _ in range(num_teams):
-            teams.append(SimpleTeam(self))
+            teams.append(MCTSTeam(self))
 
         return teams
 
@@ -121,43 +119,51 @@ class Draft:
         if pos is None:
             return self.players
         
-        if pos in self.player_postition_dict:
-            return self.player_position_dict[pos]
+        if pos in self.player_pos_dict:
+            return self.player_pos_dict[pos]
         else:
             print(f"Incorrect position: {pos}")
         
 
-    def draft_player(self, team: Team):
+    def draft_player(self, player):
         """Drafts a player to a team
 
         :param team: the team the player will be drafted to
         """
-        selection = team.make_selection()
-        team.add_player(selection)
+        team = self.teams[self.cur_team_index]
+        team.add_player(player)
 
         # remove player
-        self.players.remove(selection)
-        self.get_players(selection.position).remove(selection)
+        self.players.remove(player)
+        self.get_players(player.position).remove(player)
+
+        if self.direction == 0:
+            if self.cur_team_index < self.num_teams - 1:
+                self.cur_team_index += 1
+            else:
+                self.direction = 1
+                self.round += 1
+        else:
+            if self.cur_team_index > 0:
+                self.cur_team_index -= 1
+            else:
+                self.direction = 0
+                self.round += 1
+
+    def is_draft_over(self):
+        return self.round >= self.total_rounds
 
     def start(self):
         """Starts the draft
         """
         # drafts the players
-        while self.round < self.total_rounds:
-            self.draft_player(self.teams[self.cur_team_index])  # draft player
+        while not self.is_draft_over():
+            cur_team = self.teams[self.cur_team_index]
+            selection = cur_team.make_selection()
 
-            if self.direction == 0:
-                if self.cur_team_index < self.num_teams - 1:
-                    self.cur_team_index += 1
-                else:
-                    self.direction = 1
-                    self.round += 1
-            else:
-                if self.cur_team_index > 0:
-                    self.cur_team_index -= 1
-                else:
-                    self.direction = 0
-                    self.round += 1
+            self.draft_player(selection)  # draft player
+
+            print(selection)
 
     def end(self):
         """Ends the draft and projects rankings
