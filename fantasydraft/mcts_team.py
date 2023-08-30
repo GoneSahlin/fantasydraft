@@ -1,8 +1,9 @@
 from mcts import mcts
+import numpy as np
 
-from player import Player
-from team import Team
-from utils import get_moves
+from fantasydraft.player import Player
+from fantasydraft.team import Team
+from fantasydraft.utils import get_moves
 
 
 class State():
@@ -51,16 +52,40 @@ class State():
     def getReward(self):
         """Returns the reward for this state. Only needed for terminal states.
         """
-        scores = []
-        for team in self.draft.teams:
-            scores.append(team.calculate_total())
+        # minimizing_totals = []
+        # for i, team in enumerate(self.draft.teams):
+        #     if i != self.max_team_index:
+        #         minimizing_totals.append(team.calculate_total())
+        #     else:
+        #         maximizing_total = team.calculate_total()
+            
+        # teams_beaten = 0
+        # for minimizing_total in minimizing_totals:
+        #     if maximizing_total >= minimizing_total:
+        #         teams_beaten += 1
 
-        winner_index = scores.index(max(scores))
+        # old_reward = teams_beaten / len(minimizing_totals)
 
-        if winner_index == self.max_team_index:
-            return True
+        return self.draft.teams[self.max_team_index].calculate_total()
+
+        # totals = []
+        # for team in self.draft.teams:
+        #     totals.append(team.calculate_total())
+
+        # reward = totals[self.max_team_index] / max(totals)
+
+        # return reward
+
+        # scores = []
+        # for team in self.draft.teams:
+        #     scores.append(team.calculate_total())
+
+        # winner_index = scores.index(max(scores))
+
+        # if winner_index == self.max_team_index:
+        #     return True
         
-        return False
+        # return False
 
 
 class MCTSTeam(Team):

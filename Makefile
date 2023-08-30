@@ -18,6 +18,10 @@ collect: $(VENV)
 plot: $(VENV)
 	$(VENV)/bin/python3 scripts/plot.py
 
+.PHONY: analyze
+analyze: $(VENV)
+	$(VENV)/bin/python3 scripts/analyze.py
+
 .PHONY: test
 test: $(VENV)
 	$(VENV)/bin/pytest $(MODULE)

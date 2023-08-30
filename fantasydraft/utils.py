@@ -39,17 +39,22 @@ def create_teams(draft, team_types):
     return teams
 
 
-def print_rosters(draft, team_types):
+def print_rosters(draft, team_types, filname):
     rows = []
     for i in range(draft.total_rounds):
         row = []
         for team in draft.teams:
-            row.append(team.roster[i].name)
+            player = team.roster[i]
+            item = " ".join([player.position, player.name])
+            row.append(item)
         rows.append(row)
 
     df = pd.DataFrame(data=rows, columns=[type.name for type in team_types])
 
     print(df)
+
+    # save csv
+    df.to_csv(filname)
 
 
 def read_players():

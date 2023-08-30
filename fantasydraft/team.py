@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 from copy import deepcopy
 import numpy as np
 
-from player import Player
+from fantasydraft.player import Player
 
 
 class Team(ABC):
@@ -115,11 +115,24 @@ class Team(ABC):
                     flex_player_points = []
                     for flex_pos in self.draft.flex_options:
                         flex_player_points.extend([player.points for player in self.draft.get_players(flex_pos)[:3]])
-                    mean_points = np.mean(sorted(flex_player_points)[:3])
+
+                    # limit to top 3 players
+                    flex_player_points = sorted(flex_player_points, reverse=True)[:3]
+                    if flex_player_points:
+                        mean_points = np.mean(sorted(flex_player_points)[:3])
+                    else:
+                        mean_points = 0
                 else:
-                    mean_points = np.mean([player.points for player in self.draft.get_players(pos)[:3]])
+                    pos_players = self.draft.get_players(pos)[:3]
+                    if pos_players:
+                        mean_points = np.mean([player.points for player in pos_players])
+                    else:
+                        mean_points = 0
                 
                 total_points += mean_points * weight / 100
+
+        if np.isnan(total_points):
+            print("mean:", mean_points)
 
         return total_points
 

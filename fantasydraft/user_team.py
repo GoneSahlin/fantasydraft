@@ -1,5 +1,5 @@
 from fantasydraft.player import Player
-from team import Team
+from fantasydraft.team import Team
 
 class UserTeam(Team):
     def make_selection(self) -> Player:

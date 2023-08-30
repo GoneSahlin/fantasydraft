@@ -7,12 +7,12 @@ Author: Zach Sahlin
 import pandas as pd
 import numpy as np
 
-from team import Team
-from simple_team import SimpleTeam
-from user_team import UserTeam
-from mcts_team import MCTSTeam
-from player import Player
-from utils import create_player_pos_dict, read_players
+from fantasydraft.team import Team
+from fantasydraft.simple_team import SimpleTeam
+from fantasydraft.user_team import UserTeam
+from fantasydraft.mcts_team import MCTSTeam
+from fantasydraft.player import Player
+from fantasydraft.utils import create_player_pos_dict, read_players
 
 
 class Draft:
@@ -32,13 +32,13 @@ class Draft:
             flex_options = ["RB", "WR", "TE"]
 
         if weights is None:
-            weights = {'QB': [60, 40],
-                       'RB': [70, 70, 40, 20],
-                       'WR': [70, 70, 40, 20],
-                       'TE': [60, 40],
+            weights = {'QB': [90, 10],
+                       'RB': [60, 60, 50, 30],
+                       'WR': [60, 60, 50, 30],
+                       'TE': [90, 10],
                        'FLEX': [60, 40],
-                       'ST': [60, 30, 10],
-                       'K': [50, 20, 20, 10]}
+                       'ST': [90, 10],
+                       'K': [95, 5]}
 
         # declare variables
         self.num_teams = num_teams
@@ -132,6 +132,9 @@ class Draft:
         """
         # drafts the players
         while not self.is_draft_over():
+            if (self.cur_team_index == 0 and self.direction == 0) or (self.cur_team_index == self.num_teams - 1 and self.direction == 1) :
+                print("Round:", self.round)
+
             cur_team = self.teams[self.cur_team_index]
             selection = cur_team.make_selection()
 
